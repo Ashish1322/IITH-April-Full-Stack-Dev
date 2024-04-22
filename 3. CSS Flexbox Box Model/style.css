@@ -1,0 +1,18 @@
+* {
+   
+    color: red;
+}
+
+h1,#one, .center {
+    color: green;
+}
+
+#one {
+    text-align: right;
+}
+
+.center {
+   text-align: center; 
+}
+
+
