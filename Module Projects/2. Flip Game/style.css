@@ -1,0 +1,18 @@
+img {
+    width: 100px;
+    margin: 10px;
+}
+
+#box {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.blackbox {
+    width: 100px;
+    height: 100px;
+    background-color: black;
+    margin: 10px;
+}
+#turn, #match, #nomatch  {
+    display: none;
+}
