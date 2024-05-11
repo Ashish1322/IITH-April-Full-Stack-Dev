@@ -23,3 +23,27 @@
 
 // var box = document.getElementById("box")
 // box.append(myp,myimg)
+
+
+var a = document.createElement("p") // <p></p>
+a.innerText = "It's new paragraph" // <p>It's new Paragraph</p>
+
+{/* 
+<ul>
+    <li>first</li>
+    <li>second</li>
+    <li>third</li>
+</ul>
+<img src="" alt="">
+<input type="text"> */}
+
+// var ul = document.createElement("ul")
+// var li1 = document.createElement("li")
+// li1.innerText = "First"
+// var li2 = document.createElement("li")
+// li2.innerText = "second"
+// var li3 = document.createElement("li")
+// li3.innerText = "Third"
+// ul.append(li1,li2,li3)
+
+// document.getElementById("box").append(ul)
