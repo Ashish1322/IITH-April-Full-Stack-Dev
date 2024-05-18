@@ -1,0 +1,65 @@
+body {
+    background-color: #f4f7f6;
+}
+.chatimage {
+    width: 50px;
+    height: 50px;
+}
+.chatimage-sm {
+    width: 38px;
+    height: 38px;
+}
+
+.bg-cool:hover {
+    background-color: #d5d5d564;
+    cursor: pointer;
+}
+
+
+.outline-none {
+    outline: none;
+}
+
+.secondary-hover {
+    color: #6c757d;
+  
+}
+.secondary-hover:hover {
+    background-color: #6c757d;
+    color: white;
+    cursor: pointer;
+}
+.primary-hover {
+    color: #007bff;
+}
+.primary-hover:hover {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+.info-hover {
+    color: #17a2b8;
+}
+.info-hover:hover {
+    background-color: #17a2b8;
+    color: black;
+    cursor: pointer;
+}
+.warning-hover {
+color: #ffc107;
+}
+.warning-hover:hover{
+    background-color: #ffc107;
+    color: black;
+    cursor: pointer;
+}
+
+.sender {
+    background-color: #e8f1f3;
+}
+
+.receiver {
+    background-color: #d5d5d564;
+}
+
+
