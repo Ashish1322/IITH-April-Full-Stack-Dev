@@ -23,6 +23,11 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     required: false,
   },
+  emailVerified: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
 });
 
 export default mongoose.model("aprilchatusers", UserSchema);
