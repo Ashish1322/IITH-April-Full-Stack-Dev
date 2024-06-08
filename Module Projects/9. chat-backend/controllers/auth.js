@@ -53,7 +53,11 @@ async function signup(req, res) {
         <a href="${url}"> Click here </a>
         `,
     });
-    return res.status(200).json({ success: true, message: "Account Created" });
+    return res.status(200).json({
+      success: true,
+      message:
+        "Thanks for Signinig up. Please verify you account using the link send on email.",
+    });
   } catch (err) {
     console.log("Error ", err);
     return res.status(500).json({ success: false, message: err });
@@ -78,9 +82,13 @@ async function login(req, res) {
     const match = await bcrypt.compare(password, user.password);
     if (match) {
       const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
-      return res
-        .status(200)
-        .json({ success: true, message: "Login Success", token: token });
+      return res.status(200).json({
+        success: true,
+        message: "Login Success",
+        token: token,
+        name: user.name,
+        email: user.email,
+      });
     } else {
       return res
         .status(400)
