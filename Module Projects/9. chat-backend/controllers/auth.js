@@ -88,6 +88,7 @@ async function login(req, res) {
         token: token,
         name: user.name,
         email: user.email,
+        _id: user._id,
       });
     } else {
       return res
