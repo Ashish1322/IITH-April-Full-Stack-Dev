@@ -11,7 +11,7 @@ import AuthContext from "./contexts/AuthContext";
 // react toatisfy
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // Socket
 import socket from "./socket";
@@ -23,9 +23,10 @@ export default function App() {
   const [receiver, setReceiver] = useState(null);
   const [friends, setFriends] = useState([]);
   const [messages, setMessages] = useState([]);
+  const [receiverNameAndEmail, setReceiverNameAndEmail] = useState(null);
 
   const signup = (name, email, password, gender) => {
-    fetch("http://localhost:3001/auth/signup", {
+    fetch("https://backend-deployment-6s1d.onrender.com/auth/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json; charset=utf-8",
@@ -45,7 +46,7 @@ export default function App() {
   };
 
   const login = (email, password) => {
-    fetch("http://localhost:3001/auth/login", {
+    fetch("https://backend-deployment-6s1d.onrender.com/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json; charset=utf-8",
@@ -60,6 +61,7 @@ export default function App() {
             email: data.email,
             token: data.token,
             _id: data._id,
+            imgUrl: data.imgUrl,
           });
           // store the user in the localstorage also
           localStorage.setItem(
@@ -69,6 +71,7 @@ export default function App() {
               email: data.email,
               token: data.token,
               _id: data._id,
+              imgUrl: data.imgUrl,
             })
           );
           navigate("/");
@@ -86,7 +89,7 @@ export default function App() {
   };
 
   const sendRequest = (email) => {
-    fetch("http://localhost:3001/user/request", {
+    fetch("https://backend-deployment-6s1d.onrender.com/user/request", {
       method: "POST",
       headers: {
         "Content-Type": "application/json; charset=utf-8",
@@ -106,7 +109,7 @@ export default function App() {
   };
 
   const fetchAllFriends = () => {
-    fetch("http://localhost:3001/user/friends", {
+    fetch("https://backend-deployment-6s1d.onrender.com/user/friends", {
       method: "GET",
       headers: {
         "Content-Type": "application/json; charset=utf-8",
@@ -164,7 +167,7 @@ export default function App() {
   };
 
   const fetchAllMessages = () => {
-    fetch(`http://localhost:3001/user/messages/${receiver}`, {
+    fetch(`https://backend-deployment-6s1d.onrender.com/user/messages/${receiver}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json; charset=utf-8",
@@ -182,9 +185,32 @@ export default function App() {
       .catch((err) => toast.error(err));
   };
 
+  const uploadFile = (file) => {
+    const myData = new FormData();
+    myData.append("profile", file);
+    // upload fiel over the database
+    fetch("https://backend-deployment-6s1d.onrender.com/user/update/profile", {
+      method: "POST",
+      headers: {
+        Authorization: user.token,
+      },
+      body: myData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          toast.success(data.message);
+        } else {
+          toast.error(data.message);
+        }
+      })
+      .catch((err) => toast.error(err));
+  };
+
   useEffect(() => {
     if (user != null && receiver != null) fetchAllMessages();
   }, [user, receiver]);
+
   return (
     <div>
       <ToastContainer />
@@ -199,6 +225,9 @@ export default function App() {
           setReceiver,
           sendMessage,
           messages,
+          setReceiverNameAndEmail,
+          receiverNameAndEmail,
+          uploadFile,
         }}
       >
         <Routes>

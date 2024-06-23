@@ -28,6 +28,10 @@ const UserSchema = new mongoose.Schema({
     required: true,
     default: false,
   },
+  imgUrl: {
+    type: String,
+    required: false,
+  },
 });
 
 export default mongoose.model("aprilchatusers", UserSchema);

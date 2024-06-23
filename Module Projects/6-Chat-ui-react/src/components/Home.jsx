@@ -6,7 +6,7 @@ import Leftbar from "./Leftbar";
 import Rightbar from "./Rightbar";
 
 export default function Home() {
-  const { user, logout } = useContext(AuthContext);
+  const { user, logout, uploadFile } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,7 +27,11 @@ export default function Home() {
           <div className=" p-1 px-2 d-flex flex-row gap-3 mt-2 align-items-center">
             <img
               className="rounded-circle chatimage"
-              src={"https://bootdey.com/img/Content/avatar/avatar1.png"}
+              src={user && user.imgUrl}
+            />
+            <input
+              onChange={(e) => uploadFile(e.currentTarget.files[0])}
+              type="file"
             />
             <div>
               <p className="mb-0">{user.name}</p>

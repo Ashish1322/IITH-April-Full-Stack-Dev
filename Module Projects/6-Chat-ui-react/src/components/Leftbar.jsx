@@ -43,7 +43,11 @@ export default function Leftbar() {
                 ? item.receiver.name
                 : item.sender.name
             }
-            img="https://bootdey.com/img/Content/avatar/avatar1.png"
+            img={
+              item.sender._id == user._id
+                ? item.receiver.imgUrl
+                : item.sender.imgUrl
+            }
             minute={
               item.sender._id == user._id
                 ? item.receiver.email

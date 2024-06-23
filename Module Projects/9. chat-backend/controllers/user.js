@@ -66,7 +66,7 @@ export const allFriends = async (req, res) => {
           receiver: req.user._id,
         },
       ],
-    }).populate("sender receiver", "name email");
+    }).populate("sender receiver", "name email imgUrl");
 
     return res.status(200).json({ success: true, friends });
   } catch (err) {
@@ -106,5 +106,22 @@ export const allMessages = async (req, res) => {
     return res.status(200).json({ success: true, chats: messages });
   } catch (err) {
     return res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+export const updateProfilePhoto = async (req, res) => {
+  if (req.file) {
+    await User.findByIdAndUpdate(req.user._id, {
+      imgUrl: req.file.location,
+    });
+    return res.status(200).json({
+      success: true,
+      message: "File Uploaded Successfully",
+      imgUrl: req.file.location,
+    });
+  } else {
+    return res
+      .status(500)
+      .json({ success: false, message: "Unable to Upload File" });
   }
 };

@@ -31,14 +31,14 @@ mongoose
   .then(() => {
     // Start the express server
     console.log("Database Connected");
-    let serverPointer = app.listen(3001, () =>
-      console.log("Server is Running on Port 3001")
+    let serverPointer = app.listen(process.env.PORT || 3001, () =>
+      console.log("Server is Running on Port ", process.env.PORT || 3001)
     );
 
     // WEB SOCKET SERVER
     const io = new Server(serverPointer, {
       cors: {
-        origin: ["http://localhost:5173"],
+        origin: [process.env.frontedurl],
       },
     });
 

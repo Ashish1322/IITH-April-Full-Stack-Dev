@@ -89,6 +89,9 @@ async function login(req, res) {
         name: user.name,
         email: user.email,
         _id: user._id,
+        imgUrl: user.imgUrl
+          ? user.imgUrl
+          : "https://bootdey.com/img/Content/avatar/avatar1.png",
       });
     } else {
       return res

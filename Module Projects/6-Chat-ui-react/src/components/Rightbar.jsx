@@ -1,12 +1,18 @@
 import SendBox from "./SendBox";
 import Message from "./Message";
 import { CurrentChatBar } from "./CurrentChatBar";
-import { useContext } from "react";
+import { useContext, useRef, useEffect } from "react";
 import AuthContext from "../contexts/AuthContext";
 
 export default function Rightbar() {
   const { messages, user } = useContext(AuthContext);
-  console.log(messages);
+
+  const lastDivRef = useRef(null);
+
+  useEffect(() => {
+    lastDivRef.current.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   return (
     <div className="col col-9 p-0 right">
       <CurrentChatBar />
@@ -14,6 +20,8 @@ export default function Rightbar() {
         {messages.map((item, index) => (
           <Message message={item.message} sender={user._id == item.sender} />
         ))}
+
+        <div ref={lastDivRef}></div>
       </div>
       <div className="bottom m-2 mt-3">
         <SendBox />
