@@ -80,6 +80,7 @@ async function login(req, res) {
         .json({ success: false, message: "Your account is not activated" });
     }
     const match = await bcrypt.compare(password, user.password);
+
     if (match) {
       const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
       return res.status(200).json({

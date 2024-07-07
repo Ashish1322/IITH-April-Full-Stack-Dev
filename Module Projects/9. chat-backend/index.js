@@ -62,3 +62,5 @@ mongoose
   })
 
   .catch((err) => console.log("Unable to Connect to Database ", err));
+
+export default app;
